@@ -30,7 +30,7 @@ streamlit.write('The user entered', fruit_choice)
 
 # prepare for variablisation of the url
 #fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + "kiwi")
-fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + choice)
+fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice )
 #streamlit.text(fruityvice_response.json())
 
  #Let's Get the Fruityvice Data Looking a Little Nicer
