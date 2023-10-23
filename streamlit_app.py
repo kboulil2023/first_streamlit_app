@@ -24,7 +24,8 @@ streamlit.dataframe(fruits_to_show)
 
 #  Call the Fruityvice API from Our Streamlit App!
 streamlit.header("Fruityvice Fruit Advice!")
-fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
+# prepare for variablisation of the url
+fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + "kiwi")
 #streamlit.text(fruityvice_response.json())
 
  #Let's Get the Fruityvice Data Looking a Little Nicer
