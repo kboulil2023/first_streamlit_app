@@ -42,14 +42,17 @@ streamlit.dataframe(fruityvice_normalized)
 
 # Connect to Snowflake and Query Our Trial Account Metadata
 #Let's Query Some Data, Instead
+# Change the Streamlit Components to Make Things Look a Little Nicer
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
 #my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
 my_cur.execute("SELECT * from fruit_load_list")
 my_data_row = my_cur.fetchone()
 #streamlit.text("Hello from Snowflake:")
-streamlit.text("The fruit load list contains:")
-streamlit.text(my_data_row)
+#streamlit.text("The fruit load list contains:")
+streamlit.header("The fruit load list contains:")
+#streamlit.text(my_data_row)
+streamlit.dataframe(my_data_row)
 
 
 
