@@ -1,7 +1,11 @@
+#Put All the Import Commands Together, At the Top
 import streamlit
 import pandas
 import requests 
 import snowflake.connector
+# to be used in control of flow changes 
+from urllib.error import URLError
+
 
 streamlit.title('My Parents New Healthy Diner')
 
@@ -11,6 +15,7 @@ streamlit.text('🥗 Kale, Spinach & Rocket Smoothie')
 streamlit.text('🐔 Hard-Boiled Free-Range Egg')
 streamlit.text('🥑🍞 Avocado Toast')
 
+#import pandas
 streamlit.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
 my_fruit_list = pandas.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")
 # let the customer to choose the fruits by name, by setting and index on Fruit column (fruit name)
@@ -29,6 +34,7 @@ streamlit.header("Fruityvice Fruit Advice!")
 fruit_choice = streamlit.text_input('What fruit would you like information about?', 'Kiwi')
 streamlit.write('The user entered', fruit_choice)
 
+#import requests
 # prepare for variablisation of the url
 #fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + "kiwi")
 fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice )
@@ -40,9 +46,12 @@ fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 # display the normalized data
 streamlit.dataframe(fruityvice_normalized)
 
-# Connect to Snowflake and Query Our Trial Account Metadata
-#Let's Query Some Data, Instead
-# Change the Streamlit Components to Make Things Look a Little Nicer
+# Add a STOP Command to Focus Our Attention
+# don't run anything here while we troubleshooting
+streamlit.stop()
+
+#import snowflake.connector
+# Connect to Snowflake and Query Our Trial Account, Query Some Data, Format the results shown
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
 my_cur.execute("SELECT * from fruit_load_list")
